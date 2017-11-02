@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+    <!-- jquery-->
+    <script src="../static/js/jquery-3.2.1.min.js" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+
+    <link rel="stylesheet" href="../static/css/bootstrap-4.0.0-beta.min.css"
+          th:href="@{/css/bootstrap-4.0.0-beta.min.css}"/>
+    <script src="../static/js/popper-1.11.0.min.js" th:src="@{/js/popper-1.11.0.min.js}"></script>
+    <script src="../static/js/bootstrap-4.0.0-beta.min.js"
+            th:src="@{/js/bootstrap-4.0.0-beta.min.js}"></script>
+    <!-- Custom styles -->
+    <link href="../static/css/blog.css" th:href="@{/css/blog.css}" rel="stylesheet"/>
+    <!--toast js-->
+    <link href="../static/css/toastr.css" th:href="@{/css/toastr.css}" rel="stylesheet"/>
+    <link href="../static/css/toastr.min.css" th:href="@{/css/toastr.min.css}" rel="stylesheet"/>
+    <script src="../static/js/toastr.min.js" th:src="@{/js/toastr.min.js}"></script>
+
+    <!-- markdown editor-->
+    <link rel="stylesheet" href="../static/css/editormd.preview.css" th:href="@{/css/editormd.preview.css}"/>
+    <script src="../static/markdownEditor/marked.min.js"
+            th:src="@{/markdownEditor/marked.min.js}"></script>
+    <script src="../static/markdownEditor/prettify.min.js"
+            th:src="@{/markdownEditor/prettify.min.js}"></script>
+    <script src="../static/markdownEditor/raphael.min.js"
+            th:src="@{/markdownEditor/raphael.min.js}"></script>
+    <script src="../static/markdownEditor/underscore.min.js"
+            th:src="@{/markdownEditor/underscore.min.js}"></script>
+    <script src="../static/markdownEditor/sequence-diagram.min.js"
+            th:src="@{/markdownEditor/sequence-diagram.min.js}"></script>
+    <script src="../static/markdownEditor/flowchart.min.js"
+            th:src="@{/markdownEditor/flowchart.min.js}"></script>
+    <script src="../static/markdownEditor/jquery.flowchart.min.js"
+            th:src="@{/markdownEditor/jquery.flowchart.min.js}"></script>
+    <script src="../static/js/editormd.min.js"
+            th:src="@{/js/editormd.min.js}"></script>
+    <link rel="stylesheet" href="../static/css/editormd.css" th:href="@{/css/editormd.css}"/>
+    <script src="../static/js/editormd.min.js"
+            th:src="@{/js/editormd.min.js}"></script>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        .page-wrap {
+            min-height: 100%;
+            margin-bottom: -142px;
+        }
+
+        .page-wrap:after {
+            content: "";
+            display: block;
+        }
+
+        .issueSummary {
+            display: block;
+            color: black;
+        }
+
+        .site-footer, .page-wrap:after {
+            height: 142px;
+        }
+
+        .site-footer {
+            background-color: #4b5257;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        .issueId {
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function setMarkdown(markdown) {
+            console.log(markdown);
+            editormd.markdownToHTML("test-editormd-view", {
+                markdown: markdown,//"# hh asdas\n **as**dad",//+ "\r\n" + $("#append-test").text(),
+                //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+                htmlDecode: "style,script,iframe",  // you can filter tags decode
+                //toc             : false,
+                tocm: true,    // Using [TOCM]
+                tocContainer: "#blog-toc ", // 自定义 ToC 容器层
+                //gfm             : false,
+                saveHTMLToTextarea: true,
+                // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+                emoji: true,
+                taskList: true,
+                tex: true,  // 默认不解析
+                flowChart: true,  // 默认不解析
+                sequenceDiagram: true,  // 默认不解析
+                path: "markdownEditor/"
+            });
+        }
+
+        $(document).ready(function () {
+            $("#btnSummary").click(function () {
+//                toastr.info('应该成功成功');
+                $.ajax({
+                    url: '/issueSummary',
+                    data: {
+                        issueId: $("#modalTableId").text(),
+                        summary: $("#inputSummary").val()
+                    },
+                    type: 'POST',
+                    success: function (data) {
+                        console.log(data);
+                        if (data["code"] == 200) {
+//                            $('#exampleModalLong').modal("hide");
+                            toastr.info('提交成功');
+                            // 刷新页面
+                            location.reload();
+                        } else {
+                            toastr.error(data['msg']);
+                        }
+                    },
+                    error: function () {
+                        toastr.error('提交失败');
+                    }
+                });
+
+            });
+            $(".btnEdit").click(function () {
+                var card = $(event.target).parents(".card");
+                var issueBody = card.find('.issueBody');
+                var tableId = card.find('.tableId');
+                var issueId = card.find('.issueId');
+                var issueSummary = card.find('.issueSummary');
+                console.log(tableId.text());
+                console.log(issueId.text());
+//                console.log(issueBody.text());
+                $("#modalTableId").text(tableId.text());
+                $("#modalIssueId").text(issueId.text());
+                $("#inputSummary").val(issueSummary.text());
+                setMarkdown(issueBody.text());
+                $("#exampleModalLongTitle").text(card.find(".issueTitle").text());
+                $('#exampleModalLong').modal("show");
+
+            });
+            $('#exampleModalLong').on('hidden.bs.modal', function (e) {
+                location.reload();
+            });
+            $(".issueId").click(function (event) {
+                //var issueIdDiv = $(event.target);
+                //var issueId = issueIdDiv.text();
+                //var project = $("#issue_project").text();
+                //https://code.google.com/archive/p/addi/issues/76
+                //window.open("https://code.google.com/archive/p/" + project + "/issues/" + issueId);
+                window.open(event.target.id);
+            });
+        });
+        function displayCategoryMenu(obj){
+            $('#inputSummary').val("["+obj.value+"]");
+        }
+    </script>
+</head>
+<body>
+<!--/*@thymesVar id="pagination" type="edu.ecnu.sqslab.resource.Pagination"*/-->
+<!--/*@thymesVar id="issues" type="java.util.List<edu.ecnu.sqslab.resource.Issue>"*/-->
+<div class="page-wrap">
+    <ul>
+        <li th:each="issue:${issues}">
+            <!--<span th:text="${issue.repoId}"></span><br>-->
+            <div class="card" th:id="${issue.issueId}">
+                <div class="card-header">
+                    <span class="tableId" th:text="${issue.id}"></span><br />
+                    <span class="issueId" th:id = "${issue.issueUrl}" th:text="${issue.issueId}"></span><br />
+                    <span class="issueTitle"   th:text="${issue.title}"></span>
+                    <span class="issueSummary" th:text="${issue.summary}"></span>
+                    <h1>
+                        <span class="badge badge-success"
+                              th:if="${(issue.summary != null) and (issue.summary.length()>0)}">已标记</span>
+                        <span class="badge badge-warning"
+                              th:if="${(issue.summary == null) or (issue.summary.length()==0)}">未标记</span>
+                    </h1>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary float-right btnEdit"
+                            data-toggle="modal">
+                        打标签
+                    </button>
+                </div>
+                <div class="card-body">
+
+                    <span class="issueBody" th:text="${issue.body}"></span>
+                    <!--<br>-->
+                </div>
+
+            </div>
+        </li>
+    </ul>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h5 id="modalTableId"></h5><br />
+                    <h5 id="modalIssueId"></h5><br/>
+                    <h6 class="modal-title" id="exampleModalLongTitle">Modal title</h6>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div id="issueBody" class="modal-body">
+                <div class="container">
+                    <div id="test-editormd-view">
+                        <textarea style="display:none;"
+                                  name="test-editormd-markdown-doc">###Hello world!</textarea>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label >Category: </label>
+                <select onchange="displayCategoryMenu(this)">
+                    <option selected="selected">null</option>
+                    <option>Thread</option>
+                    <option>Performance</option>
+                    <option>OOM</option>
+                    <option>I/O</option>
+                    <option>Database</option>
+                    <option>Network</option>
+                    <option>Crash</option>
+                    <option>OtherBug</option>
+                    <option>Unclear</option>
+                    <option>Unrelated</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <input class="form-control" id="inputSummary" placeholder="summary"/>
+                <button id="btnSummary" type="button" class="btn btn-primary">提交Summary</button>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="site-footer">
+    <!--I'm the Sticky Footer.-->
+    <!--</footer>-->
+    <!--<div class="page">-->
+    <!--xxx-->
+    <!--</div>-->
+    <!--<footer class="footer-pagination">-->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item" th:if="${!pagination.isFirstPage()}">
+                <a class="page-link"
+                   th:href="${pagination.baseUrl+'?p='+(pagination.getCurrentPage()-1)+'&amp;s='+pagination.pageSize}"
+                   aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li th:each="i : ${#numbers.sequence(pagination.getFirstPage(),pagination.getLastPage())}"
+                th:class="${pagination.currentPage==i?'active page-item':'page-item'}">
+                <a class="page-link"
+                   th:href="${pagination.baseUrl+'?p='+i+'&amp;'+'s='+pagination.pageSize}"
+                   th:text="${i}">1</a>
+            </li>
+            <li class="page-item" th:if="${!pagination.isLastPage()}">
+                <a class="page-link"
+                   th:href="${pagination.baseUrl+'?p='+(pagination.getCurrentPage()+1)+'&amp;'+'s='+pagination.pageSize}"
+                   aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</footer>
+
+
+</body>
+</html>

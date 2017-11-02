@@ -1,0 +1,102 @@
+header nav, main-contont {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+header nav div div a img {
+    margin-top: -6px;
+}
+
+li {
+    list-style: none;
+}
+
+* {
+    margin: 0;
+}
+
+/*a {*/
+    /*color: #3399FF;*/
+    /*font-weight: Normal; !*CSS字体效果 普通 可以改成bold粗体 如果去除此行那么默认是不显示下划线的*!*/
+    /*text-decoration: none; !*CSS下划线效果：无下划线*!*/
+/*}*/
+
+/*a:hover {*/
+    /*color: #4499EE;*/
+    /*text-decoration: none; !*CSS下划线效果：无下划线*!*/
+    /*border-bottom: 1px #0099CC dotted !*CSS加一个只有下边的框 边框为虚线*!*/
+/*}*/
+
+html, body {
+    height: 100%;
+}
+
+#summery {
+    height: 100%;
+    float: right;
+    padding: 20px 0px;
+}
+
+.page {
+    min-height: 100%;
+    /* equal to footer height */
+    margin-bottom: -110px;
+}
+
+.main-content {
+    position: relative;
+    width: 100%;
+    padding: 50px 200px 110px;
+}
+
+/*.main-content:after {*/
+/*content: "";*/
+/*display: block;*/
+/*}*/
+
+/*.main-content:after {*/
+/*height: 0px;*/
+/*}*/
+#blog-footer {
+    height: 110px;
+    width: 100%;
+    display: block;
+    background-color: #4b5257;
+    padding: 20px 50px;
+    color: white;
+}
+
+#blog-footer ul li {
+    float: left;
+    list-style: none;
+    margin: 0px 20px 0px 0px;
+}
+
+#blog-footer ul {
+    display: inline-block;
+    padding: 0px;
+}
+
+.user-avatar-small {
+    width: 40px;
+    height: 40px;
+}
+
+.user-name {
+    margin-left: 20px;
+    font-size: large;
+}
+
+.blog-update-time {
+    height: 40px;
+    line-height: 40px;
+}
+
+.blog-title {
+    font-size: 20px;
+}
+
+.blog-card {
+    border: #00a8c6;
+    margin-bottom: 20px;
+}

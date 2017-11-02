@@ -1,0 +1,134 @@
+<!doctype html>
+
+<title>CodeMirror: Language Modes</title>
+<meta charset="utf-8"/>
+<link rel=stylesheet href="../doc/docs.css">
+
+<div id=nav>
+  <a href="http://codemirror.net"><h1>CodeMirror</h1><img id=logo src="../doc/logo.png"></a>
+
+  <ul>
+    <li><a href="../currentPage.html">Home</a>
+    <li><a href="../doc/manual.html">Manual</a>
+    <li><a href="https://github.com/codemirror/codemirror">Code</a>
+  </ul>
+  <ul>
+    <li><a class=active href="#">Language modes</a>
+  </ul>
+</div>
+
+<article>
+
+  <h2>Language modes</h2>
+
+  <p>This is a list of every mode in the distribution. Each mode lives
+in a subdirectory of the <code>mode/</code> directory, and typically
+defines a single JavaScript file that implements the mode. Loading
+such file will make the language available to CodeMirror, through
+the <a href="../doc/manual.html#option_mode"><code>mode</code></a>
+option.</p>
+
+  <div style="-webkit-columns: 100px 2; -moz-columns: 100px 2; columns: 100px 2;">
+    <ul style="margin-top: 0">
+      <li><a href="apl/currentPage.html">APL</a></li>
+      <li><a href="asterisk/currentPage.html">Asterisk dialplan</a></li>
+      <li><a href="clike/currentPage.html">C, C++, C#</a></li>
+      <li><a href="clojure/currentPage.html">Clojure</a></li>
+      <li><a href="cobol/currentPage.html">COBOL</a></li>
+      <li><a href="coffeescript/currentPage.html">CoffeeScript</a></li>
+      <li><a href="commonlisp/currentPage.html">Common Lisp</a></li>
+      <li><a href="css/currentPage.html">CSS</a></li>
+      <li><a href="cypher/currentPage.html">Cypher</a></li>
+      <li><a href="python/currentPage.html">Cython</a></li>
+      <li><a href="d/currentPage.html">D</a></li>
+      <li><a href="dart/currentPage.html">Dart</a></li>
+      <li><a href="django/currentPage.html">Django</a> (templating language)</li>
+      <li><a href="dockerfile/currentPage.html">Dockerfile</a></li>
+      <li><a href="diff/currentPage.html">diff</a></li>
+      <li><a href="dtd/currentPage.html">DTD</a></li>
+      <li><a href="dylan/currentPage.html">Dylan</a></li>
+      <li><a href="ebnf/currentPage.html">EBNF</a></li>
+      <li><a href="ecl/currentPage.html">ECL</a></li>
+      <li><a href="eiffel/currentPage.html">Eiffel</a></li>
+      <li><a href="erlang/currentPage.html">Erlang</a></li>
+      <li><a href="forth/currentPage.html">Forth</a></li>
+      <li><a href="fortran/currentPage.html">Fortran</a></li>
+      <li><a href="mllike/currentPage.html">F#</a></li>
+      <li><a href="gas/currentPage.html">Gas</a> (AT&amp;T-style assembly)</li>
+      <li><a href="gherkin/currentPage.html">Gherkin</a></li>
+      <li><a href="go/currentPage.html">Go</a></li>
+      <li><a href="groovy/currentPage.html">Groovy</a></li>
+      <li><a href="haml/currentPage.html">HAML</a></li>
+      <li><a href="haskell/currentPage.html">Haskell</a></li>
+      <li><a href="haxe/currentPage.html">Haxe</a></li>
+      <li><a href="htmlembedded/currentPage.html">HTML embedded scripts</a></li>
+      <li><a href="htmlmixed/currentPage.html">HTML mixed-mode</a></li>
+      <li><a href="http/currentPage.html">HTTP</a></li>
+      <li><a href="idl/currentPage.html">IDL</a></li>
+      <li><a href="clike/currentPage.html">Java</a></li>
+      <li><a href="jade/currentPage.html">Jade</a></li>
+      <li><a href="javascript/currentPage.html">JavaScript</a></li>
+      <li><a href="jinja2/currentPage.html">Jinja2</a></li>
+      <li><a href="julia/currentPage.html">Julia</a></li>
+      <li><a href="kotlin/currentPage.html">Kotlin</a></li>
+      <li><a href="css/less.html">LESS</a></li>
+      <li><a href="livescript/currentPage.html">LiveScript</a></li>
+      <li><a href="lua/currentPage.html">Lua</a></li>
+      <li><a href="markdown/currentPage.html">Markdown</a> (<a href="gfm/currentPage.html">GitHub-flavour</a>)</li>
+      <li><a href="mirc/currentPage.html">mIRC</a></li>
+      <li><a href="modelica/currentPage.html">Modelica</a></li>
+      <li><a href="nginx/currentPage.html">Nginx</a></li>
+      <li><a href="ntriples/currentPage.html">NTriples</a></li>
+      <li><a href="clike/currentPage.html">Objective C</a></li>
+      <li><a href="mllike/currentPage.html">OCaml</a></li>
+      <li><a href="octave/currentPage.html">Octave</a> (MATLAB)</li>
+      <li><a href="pascal/currentPage.html">Pascal</a></li>
+      <li><a href="pegjs/currentPage.html">PEG.js</a></li>
+      <li><a href="perl/currentPage.html">Perl</a></li>
+      <li><a href="php/currentPage.html">PHP</a></li>
+      <li><a href="pig/currentPage.html">Pig Latin</a></li>
+      <li><a href="properties/currentPage.html">Properties files</a></li>
+      <li><a href="puppet/currentPage.html">Puppet</a></li>
+      <li><a href="python/currentPage.html">Python</a></li>
+      <li><a href="q/currentPage.html">Q</a></li>
+      <li><a href="r/currentPage.html">R</a></li>
+      <li><a href="rpm/currentPage.html">RPM</a></li>
+      <li><a href="rst/currentPage.html">reStructuredText</a></li>
+      <li><a href="ruby/currentPage.html">Ruby</a></li>
+      <li><a href="rust/currentPage.html">Rust</a></li>
+      <li><a href="sass/currentPage.html">Sass</a></li>
+      <li><a href="spreadsheet/currentPage.html">Spreadsheet</a></li>
+      <li><a href="clike/scala.html">Scala</a></li>
+      <li><a href="scheme/currentPage.html">Scheme</a></li>
+      <li><a href="css/scss.html">SCSS</a></li>
+      <li><a href="shell/currentPage.html">Shell</a></li>
+      <li><a href="sieve/currentPage.html">Sieve</a></li>
+      <li><a href="slim/currentPage.html">Slim</a></li>
+      <li><a href="smalltalk/currentPage.html">Smalltalk</a></li>
+      <li><a href="smarty/currentPage.html">Smarty</a></li>
+      <li><a href="smartymixed/currentPage.html">Smarty/HTML mixed</a></li>
+      <li><a href="solr/currentPage.html">Solr</a></li>
+      <li><a href="soy/currentPage.html">Soy</a></li>
+      <li><a href="stylus/currentPage.html">Stylus</a></li>
+      <li><a href="sql/currentPage.html">SQL</a> (several dialects)</li>
+      <li><a href="sparql/currentPage.html">SPARQL</a></li>
+      <li><a href="stex/currentPage.html">sTeX, LaTeX</a></li>
+      <li><a href="tcl/currentPage.html">Tcl</a></li>
+      <li><a href="textile/currentPage.html">Textile</a></li>
+      <li><a href="tiddlywiki/currentPage.html">Tiddlywiki</a></li>
+      <li><a href="tiki/currentPage.html">Tiki wiki</a></li>
+      <li><a href="toml/currentPage.html">TOML</a></li>
+      <li><a href="tornado/currentPage.html">Tornado</a> (templating language)</li>
+      <li><a href="turtle/currentPage.html">Turtle</a></li>
+      <li><a href="vb/currentPage.html">VB.NET</a></li>
+      <li><a href="vbscript/currentPage.html">VBScript</a></li>
+      <li><a href="velocity/currentPage.html">Velocity</a></li>
+      <li><a href="verilog/currentPage.html">Verilog/SystemVerilog</a></li>
+      <li><a href="xml/currentPage.html">XML/HTML</a></li>
+      <li><a href="xquery/currentPage.html">XQuery</a></li>
+      <li><a href="yaml/currentPage.html">YAML</a></li>
+      <li><a href="z80/currentPage.html">Z80</a></li>
+    </ul>
+  </div>
+
+</article>
